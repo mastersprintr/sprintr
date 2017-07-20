@@ -1,0 +1,15 @@
+{
+  "name": "sprintr-backend",
+  "version": "1.0.0",
+  "description": "#GreenerPastures",
+  "main": "app.js",
+  "dependencies": {
+    "express": "*",
+    "mongoose": "*"
+  },
+  "scripts": {
+    "start": ""
+  },
+  "author": "mastersprintr@gmail.com",
+  "license": "ISC"
+}

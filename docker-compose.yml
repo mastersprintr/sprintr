@@ -1,0 +1,37 @@
+version: '2'
+services:
+  mongodb:
+    build:
+      context: mongodb
+      args:
+        - "http_proxy=${http_proxy}"
+        - "https_proxy=${https_proxy}"
+        - "no_proxy=${no_proxy}"
+    environment:
+      MONGODB_PASS: 1234
+
+  frontend:
+    build:
+      context: frontend
+    volumes:
+      - ./frontend:/app
+
+  backend:
+    build:
+      context: backend
+    volumes:
+      - ./backend:/app
+
+  nginx:
+    build:
+      context: nginx
+    links:
+      - frontend
+      - backend
+    ports:
+      - "1666:1666"
+      - "8080:8080"
+    volumes:
+      - ./nginx:/conf:ro
+      # - ./frontend/dist:/var/www/html:ro
+    entrypoint: nginx -c /conf/rain.conf
