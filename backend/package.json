@@ -4,11 +4,15 @@
   "description": "#GreenerPastures",
   "main": "app.js",
   "dependencies": {
+    "body-parser": "^1.17.2",
+    "cookie-parser": "^1.4.3",
     "express": "*",
-    "mongoose": "*"
+    "mongojs": "^2.4.0",
+    "mongoose": "*",
+    "morgan": "^1.8.2"
   },
   "scripts": {
-    "start": ""
+    "start": "node app/app.js"
   },
   "author": "mastersprintr@gmail.com",
   "license": "ISC"
