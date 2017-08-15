@@ -7,6 +7,7 @@ module.exports = {
     entry: "./app/index.jsx",
     debug: true,
     devServer: {
+        disableHostCheck: true,
         historyApiFallback: true,
         hot: true,
         inline: true,

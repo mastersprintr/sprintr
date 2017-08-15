@@ -2,7 +2,7 @@
   "name": "sprintr",
   "version": "0.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "index.jsx",
   "dependencies": {
     "alt": "^0.18.6",
     "babel-core": "^6.17.0",

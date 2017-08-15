@@ -1,14 +1,14 @@
 version: '2'
 services:
-  mongodb:
-    build:
-      context: mongodb
-      args:
-        - "http_proxy=${http_proxy}"
-        - "https_proxy=${https_proxy}"
-        - "no_proxy=${no_proxy}"
-    environment:
-      MONGODB_PASS: 1234
+  # mongodb:
+  #   build:
+  #     context: mongodb
+  #     args:
+  #       - "http_proxy=${http_proxy}"
+  #       - "https_proxy=${https_proxy}"
+  #       - "no_proxy=${no_proxy}"
+  #   environment:
+  #     MONGODB_PASS: 1234
 
   frontend:
     build:
@@ -29,9 +29,10 @@ services:
       - frontend
       - backend
     ports:
-      - "1666:1666"
       - "8080:8080"
+      - "3000:3000"
+      - "80:80"
     volumes:
       - ./nginx:/conf:ro
       # - ./frontend/dist:/var/www/html:ro
-    entrypoint: nginx -c /conf/rain.conf
+    entrypoint: nginx -c /conf/nginx.conf
