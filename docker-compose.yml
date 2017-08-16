@@ -15,6 +15,8 @@ services:
       context: frontend
     volumes:
       - ./frontend:/app
+    ports:
+      - "8080:8080"
 
   backend:
     build:
@@ -29,8 +31,6 @@ services:
       - frontend
       - backend
     ports:
-      - "8080:8080"
-      - "3000:3000"
       - "80:80"
     volumes:
       - ./nginx:/conf:ro
