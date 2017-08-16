@@ -6,7 +6,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
-    "express": "*",
+    "express": "^4.15.4",
     "mongojs": "^2.4.0",
     "mongoose": "*",
     "morgan": "^1.8.2"
@@ -15,5 +15,8 @@
     "start": "node app/app.js"
   },
   "author": "mastersprintr@gmail.com",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "webpack-dev-server": "^2.7.1"
+  }
 }
