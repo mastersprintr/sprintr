@@ -30,7 +30,7 @@
     "eslint-plugin-react": "^6.10.3"
   },
   "scripts": {
-    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base app --host 0.0.0.0"
+    "start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js --content-base app --host 0.0.0.0 --port 9500"
   },
   "author": "mastersprintr@gmail.com",
   "license": "ISC"
