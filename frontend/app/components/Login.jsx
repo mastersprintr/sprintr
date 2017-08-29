@@ -59,7 +59,7 @@ export default class Login extends React.Component {
                                 <form>
                                     <TextField name="username" onChange={this.handleChange} floatingLabelText="Username" underlineFocusStyle={style.underlineFocusStyle} floatingLabelFocusStyle={style.floatingLabelFocusStyle}/><br/>
                                     <TextField name="password" type={"password"} onChange={this.handleChange} floatingLabelText="Password" underlineFocusStyle={style.underlineFocusStyle} floatingLabelFocusStyle={style.floatingLabelFocusStyle}/><br/>
-                                    <RaisedButton className="raised-button--rounded" label="Login" primary={true} style={style["login-button-overlay"]} overlayStyle={style["login-button"]} buttonStyle={style["login-button"]} onClick={this.onClick}/>
+                                    <RaisedButton className="raised-button--rounded" label="Log In" labelStyle={style["loginButtonLabel"]} primary={true} style={style["login-button-overlay"]} overlayStyle={style["login-button"]} buttonStyle={style["login-button"]} onClick={this.onClick}/>
                                 </form>
                             </div>
                         </Paper>
