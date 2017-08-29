@@ -8,7 +8,7 @@ import RaisedButton from "material-ui/RaisedButton";
 import PropTypes from "prop-types";
 
 import AppActions from "../actions/AppActions.jsx";
-import style from "./css/style.js";
+import style from "../styles/login.js";
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -50,16 +50,20 @@ export default class Login extends React.Component {
         return (
             <div>
               <MuiThemeProvider>
-                    <Paper style={style.paper} zDepth={2} rounded={true}>
-                        <h1 style={style.h1} >Sprintr</h1>
-                        <div style={style.loginGroup}>
-                            <form>
-                                <TextField name="username" onChange={this.handleChange} floatingLabelText="Username"/><br/>
-                                <TextField name="password" type={"password"} onChange={this.handleChange} floatingLabelText="Password"/><br/>
-                                <RaisedButton label="Login" primary={true} style={style.buttonSpacing} onClick={this.onClick}/>
-                            </form>
-                        </div>
-                    </Paper>
+                    <div class="full-window" style={style["full-window"]} >
+                        <div class="quarter-window" style={style["quarter-window"]}></div>
+                        <Paper id="login-paper" style={style["login-paper"]}>
+                        <Paper id="login-logo" style={style["login-logo"]} zDepth={0} circle={true}><img src="./images/logo.png"/></Paper>
+                            <h1 style={style.h1} >Sprintr</h1>
+                            <div style={style.loginGroup}>
+                                <form>
+                                    <TextField name="username" onChange={this.handleChange} floatingLabelText="Username" underlineFocusStyle={style.underlineFocusStyle} floatingLabelFocusStyle={style.floatingLabelFocusStyle}/><br/>
+                                    <TextField name="password" type={"password"} onChange={this.handleChange} floatingLabelText="Password" underlineFocusStyle={style.underlineFocusStyle} floatingLabelFocusStyle={style.floatingLabelFocusStyle}/><br/>
+                                    <RaisedButton className="raised-button--rounded" label="Login" primary={true} style={style["login-button-overlay"]} overlayStyle={style["login-button"]} buttonStyle={style["login-button"]} onClick={this.onClick}/>
+                                </form>
+                            </div>
+                        </Paper>
+                    </div>
                 </MuiThemeProvider>
             </div>
         );

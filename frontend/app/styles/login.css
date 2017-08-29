@@ -1,0 +1,4 @@
+.raised-button--rounded,
+.raised-button--rounded button {
+  border-radius: 25px; /* assuming one is not already defined */
+}
