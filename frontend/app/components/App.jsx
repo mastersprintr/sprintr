@@ -5,7 +5,7 @@ import AppStore from "../stores/AppStore.jsx";
 import AppActions from "../actions/AppActions.jsx";
 
 import {Route,
-        BrowserRouter as Router, 
+        BrowserRouter as Router,
         Switch,
         Redirect,
         // withRouter
@@ -51,7 +51,7 @@ class App extends React.Component {
 
     renderApp = () => {
         // Just automatically logout after 10 seconds for demo purposes...
-        setTimeout(this.fakeLogout, 100000);
+        setTimeout(this.fakeLogout, 10000);
 
         return (
             <div>
