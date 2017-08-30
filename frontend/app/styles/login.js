@@ -1,7 +1,5 @@
 import {greenA700, teal900} from "material-ui/styles/colors";
 
-// console.log(colors)
-
 const style = {
     loginPaper: {
         width: 400,
@@ -38,9 +36,6 @@ const style = {
         borderColor: greenA700
     },
     floatingLabelStyle: {
-        color: greenA700
-    },
-    floatingLabelFocusStyle: {
         color: greenA700
     }
 };
