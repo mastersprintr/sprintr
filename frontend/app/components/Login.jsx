@@ -78,8 +78,7 @@ export default class Login extends React.Component {
                                         overlayStyle={styles["loginButton"]} 
                                         buttonStyle={styles["loginButton"]} 
                                         onClick={this.onClick}/>
-                                </form>
-                      
+                                </form>                      
                         </Paper>
                     </div>
                 </MuiThemeProvider>
