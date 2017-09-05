@@ -13,3 +13,18 @@
     font-size: 60px;
     margin-top: -20px;
 }
+
+#loginFooter {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   padding-left:15px;
+   padding-bottom:5px;
+}
+
+#loginFooter a {
+    color: rgba(255, 255, 255, 0.5);;
+    text-decoration: none;
+    font-size: 15px;
+}

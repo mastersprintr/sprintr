@@ -1,6 +1,6 @@
 import {greenA700, teal900} from "material-ui/styles/colors";
 
-const style = {
+const styles = {
     loginPaper: {
         width: 400,
         margin: "auto",
@@ -40,4 +40,4 @@ const style = {
     }
 };
 
-module.exports = style;
+export default styles;

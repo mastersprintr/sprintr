@@ -3,9 +3,14 @@ html, body {
     height: 100%;
     margin: 0px;
     padding: 0px;
+    font-family: "Titillium Web";
 }
 
 .quarterWindow {
     height: 20vh;
     clear: both;
+}
+
+.centeredText {
+    text-align: center;
 }
