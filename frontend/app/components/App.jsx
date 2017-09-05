@@ -3,7 +3,7 @@ import Login from "./Login.jsx";
 import Error from "./Error.jsx";
 import AppStore from "../stores/AppStore.jsx";
 import AppActions from "../actions/AppActions.jsx";
-
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import {Route,
         BrowserRouter as Router,
         Switch,
@@ -12,15 +12,17 @@ import {Route,
         } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import AppBar from "./AppBar.jsx";
+
 class Test1 extends React.Component {
     render() {
-        return (<h1>Test1</h1>);
+        return (<h1 class="centeredText">Test1</h1>);
     }
 }
 
 class Test2 extends React.Component {
     render() {
-        return (<h1>Test2</h1>);
+        return (<h1 class="centeredText">Test2</h1>);
     }
 }
 
@@ -51,18 +53,20 @@ class App extends React.Component {
 
     renderApp = () => {
         // Just automatically logout after 10 seconds for demo purposes...
-        setTimeout(this.fakeLogout, 10000);
-
+        // setTimeout(this.fakeLogout, 10000);
+        // This Page automatically logs you out after 10 seconds... You can get out to reset the timer.. //(moved out of return())
         return (
             <div>
-                <h1>Logged in as {this.state.username}</h1>
-                <br/>
-                This Page automatically logs you out after 10 seconds... You can get out to reset the timer..
-                <Switch>
-                    <Route path="/app/test1" component={Test1}/>
-                    <Route path="/app/test2" component={Test2}/>
-                    <Route component={Error}/>
-                </Switch>
+                <MuiThemeProvider>
+                    <div>
+                        <AppBar username={this.state.username}/>
+                        <Switch>
+                            <Route path="/app/test1" component={Test1}/>
+                            <Route path="/app/test2" component={Test2}/>
+                            <Route component={Error}/>
+                        </Switch>
+                    </div>
+                </MuiThemeProvider>
             </div>
         );
     }
@@ -93,5 +97,3 @@ export default class Main extends React.Component {
         );
     }
 }
-
-
