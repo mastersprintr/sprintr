@@ -5,10 +5,7 @@ import Avatar from "material-ui/Avatar";
 import styles from "../styles/appBar.js";
 
 export default class AppBar extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
+    
     render() {
         return (
             <div id="appBar">

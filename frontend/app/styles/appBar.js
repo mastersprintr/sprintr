@@ -1,4 +1,4 @@
-import {greenA700, teal900} from "material-ui/styles/colors";
+import {teal900} from "material-ui/styles/colors";
 
 const styles = {
     appBar: {
@@ -32,4 +32,4 @@ const styles = {
     }
 };
 
-module.exports = styles;
+export default styles;
