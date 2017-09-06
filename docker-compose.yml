@@ -1,28 +1,35 @@
 version: '2'
 services:
-  # mongodb:
-  #   build:
-  #     context: mongodb
-  #     args:
-  #       - "http_proxy=${http_proxy}"
-  #       - "https_proxy=${https_proxy}"
-  #       - "no_proxy=${no_proxy}"
-  #   environment:
-  #     MONGODB_PASS: 1234
+  mongodb:
+    build:
+      context: mongodb
+      args:
+        - "smallfiles"
+      #   - "http_proxy=${http_proxy}"
+      #   - "https_proxy=${https_proxy}"
+      #   - "no_proxy=${no_proxy}"
+    environment:
+      MONGODB_PASS: 1234
 
   frontend:
     build:
       context: frontend
     volumes:
       - ./frontend:/app
+      - /app/node_modules/
     ports:
       - "9500:9500"
+    depends_on:
+      - "mongodb"
 
   backend:
     build:
       context: backend
     volumes:
       - ./backend:/app
+      - /app/node_modules/
+    ports:
+      - "3000:3000"
 
   nginx:
     build:
