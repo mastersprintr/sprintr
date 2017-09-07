@@ -11,7 +11,7 @@ RUN apk update && apk add bash
 RUN mkdir -p /app/dist
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install
-RUN cp -a tmp/node_modules/ /app/node_modules/
+RUN mv tmp/node_modules/ /app/node_modules/
 
 RUN npm install --global nodemon
 

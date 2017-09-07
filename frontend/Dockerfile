@@ -10,7 +10,7 @@ RUN apk update && apk add bash
 
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install
-RUN mkdir /app && cp -a tmp/node_modules/ /app/node_modules/
+RUN mkdir /app && mv tmp/node_modules/ /app/node_modules/
 
 RUN echo "cd /app; npm start" > /usr/local/bin/npm_install_at_start.sh
 ENTRYPOINT bin/bash /usr/local/bin/npm_install_at_start.sh
