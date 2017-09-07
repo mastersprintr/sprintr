@@ -75,6 +75,7 @@ export default class Login extends React.Component {
                                     style={styles["loginButtonOverlay"]} 
                                     overlayStyle={styles["loginButton"]} 
                                     buttonStyle={styles["loginButton"]} 
+                                    type="submit"
                                     onClick={this.onClick}/>
                             </form>                      
                         </Paper>
