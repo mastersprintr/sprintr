@@ -7,6 +7,7 @@
     "body-parser": "^1.17.2",
     "cookie-parser": "^1.4.3",
     "express": "^4.15.4",
+    "express-session": "^1.15.5",
     "mongojs": "^2.4.0",
     "mongoose": "^4.11.7",
     "morgan": "^1.8.2",
