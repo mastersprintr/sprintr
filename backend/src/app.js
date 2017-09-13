@@ -1,112 +1,81 @@
-import express from "express";
-import cookieParser from "cookie-parser";
-import bodyParser from "body-parser";
-import path from "path";
-import logger from "morgan"; // not yet used but may be needed in the future
-import config from "./config"; // this will be the place where configuration is stored
-import passport from "passport";
-import { Strategy } from "passport-local";
-import mongoose from "mongoose";
-import waitForPort from "wait-for-port";
+var express = require("express");
+var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
+var path = require("path");
+var logger = require("morgan");
+//var config = require("./config"); // this will be the place where configuration is stored
+var passport = require("passport");
+var Strategy = require("passport-local").Strategy;
+var mongoose = require("mongoose");
+var session = require("express-session");
 
-// var User = require("./models/User.model");
+var User = require("./models/User.model");
+var db = "mongodb://localhost/sprintr";
+mongoose.connect(db);
 
-class App {
-    constructor() {
-        this.waitForDB(config.mongoUrl, config.mongoPort, this.init);
-    }
-
-    waitForDB = (mongoUrl, mongoPort, cb) => {
-        console.log("Backend: Waiting for mongoDB to initialize....");
-
-        const waitOpts = {
-            numRetries: 100,
-            retryInterval: 1000
-        };
-
-        waitForPort(mongoUrl, mongoPort, waitOpts, (err) => {
-            if(err) {
-                console.log("Fatal!");
-                throw new Error(err);
-            }
-            console.log("Backend: Connection to db established..");
-            cb();
+passport.use(new Strategy(function(username, password, cb) {
+    User.findOne({"username": username})
+        .exec(function(err, user) {
+            if (err) { return cb(err); }
+            if (!user) { return cb(null, false); }
+            if (user.password !== password) { console.log("password does not match"); return cb(null, false); }
+            return cb(null, user);
         });
-    }
+}));
 
-    init = () => {
-        // DB initialization
-        mongoose.connect(config.mongoUrl); // check for authentication here
-        var PORT = 3000;
-        var app = express();
+passport.serializeUser(function(user, cb) {
+    cb(null, user._id);
+});
 
-        // Routes
-        // var index = require("./routes/index");
-        // Route Usage
-        // app.use("/", index);
-
-        app.listen(PORT, function() {
-            console.log("Sprintr is now running on port " + PORT);
+passport.deserializeUser(function(_id, cb) {
+    User.findOne({_id: _id})
+        .exec(function(err, user) {
+            if (err) { return cb(err); }
+            cb(null, user);
         });
-    }
+});
 
-    die = () => {
-        mongoose.disconnect();
-    }
+var PORT = 3000;
+var app = express();
 
+// HTTP backends that does the magic
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(session({secret: "greenpastures", resave: false, saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(logger("dev"));
+app.use(express.static(path.join(__dirname, "views")));
 
-    // Passport Initialization
-    // passport.use(new Strategy(function(username, password, cb) {
-    //     User.findOne({username: username})
-    //         .exec(function(err, user) {
-    //             if (err) { return cb(err); }
-    //             if (!user) { return cb(null, false); }
-    //             if (user.password !== password) { return cb(null, false); }
-    //             return cb(null, user);
-    //         });
-    // }));
+// Routes
+var index = require("./routes/index");
 
-    // passport.serializeUser(function(user, cb) {
-    //     cb(null, user._id);
-    // });
+app.use("/", index);
 
-    // passport.deserializeUser(function(_id, cb) {
-    //     User.findOne({_id: _id})
-    //         .exec(function(err, user) {
-    //             if (err) { return cb(err); }
-    //             cb(null, user);
-    //         });
-    // });
+app.post("/login", passport.authenticate("local", {failureRedirect: "/login"}), function(req, res) {
+    console.log("User " + req.body.username + "has logged in.");
+    res.send("ok");
+});
 
+app.get("/users", isLoggedIn, function(req, res) {
+    User.find()
+        .exec(function(err, users) {
+            if (!err) { res.json(users); }
+        });
+});
 
+app.get("/logout", function(req, res) {
+    req.logout();
+    console.log("logged out");
+    res.redirect("/");
+});
 
-    // HTTP backends that does the magic
-    // app.use(bodyParser.json());
-    // app.use(bodyParser.urlencoded({extended: false}));
-    // app.use(cookieParser());
-    // app.use(passport.initialize());
-    // app.use(passport.session());
-    // app.use(logger("dev"));
-
-    // // Routes
-    // var index = require("./routes/index");
-    // // var api = require('./routes/api');
-
-    // // Register static files
-    // app.use(express.static(path.join(__dirname, "views")));
-
-    // // Route Usage
-    // // app.use('/api', api) : in-progress
-
-    // app.post("/login", passport.authenticate("local"));
-
-
-    // app.use("/users", function(req, res) {
-    //     User.find()
-    //         .exec(function(err, users) {
-    //             if (!err) { res.json(users); }
-    //         });
-    // });
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) { return next(); }
+    res.redirect("/");
 }
 
-export default new App();
+app.listen(PORT, function() {
+    console.log("Sprintr is now running on port " + PORT);
+});
