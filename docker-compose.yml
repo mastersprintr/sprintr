@@ -7,8 +7,6 @@ services:
       #   - "http_proxy=${http_proxy}"
       #   - "https_proxy=${https_proxy}"
       #   - "no_proxy=${no_proxy}"
-    environment:
-      MONGODB_PASS: 1234
 
   frontend:
     build:

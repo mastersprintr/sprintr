@@ -18,7 +18,8 @@
 
 const config = {
     mongoUrl: "mongodb",
-    mongoPort: 27017
+    mongoPort: 27017,
+    mongoUrlWithSprintr: "mongodb/sprintr"
 };
 
 export default config;
