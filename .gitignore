@@ -46,6 +46,7 @@ build/Release
 
 # Dependency directories
 node_modules/
+node_modules*/
 jspm_packages/
 
 # Typescript v1 declaration files
@@ -71,3 +72,6 @@ typings/
 
 # history plugin for vscode
 .history
+
+# Sprintr specific
+dist/

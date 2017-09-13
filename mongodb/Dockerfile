@@ -1,2 +1,2 @@
-FROM tutum/mongodb
+FROM mongo:latest
 MAINTAINER mastersprintr@gmail.com

@@ -4,7 +4,7 @@ var webpack = require("webpack");
 module.exports = {
     context: __dirname,
     devtool: debug ? "inline-sourcemap" : null,
-    entry: "./app/index.jsx",
+    entry: "./src/index.jsx",
     debug: true,
     devServer: {
         disableHostCheck: true,
