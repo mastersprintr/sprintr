@@ -52,29 +52,25 @@ class App {
 
         // Routes
         var index = require("./routes/index");
+        var data = require("./routes/data");
+        var api = require("./routes/api");
 
         app.use("/", index);
+        app.use("/api", api);
+        app.use("/api/data", this.isLoggedIn, data);
 
-        app.post("/login", auth.authenticate("local", {failureRedirect: "/login"}), function(req, res) {
-            console.log("User " + req.body.username + "has logged in.");
-            res.send("ok");
-        });
-
-        app.get("/users", this.isLoggedIn, function(req, res) {
-            User.find()
-                .exec(function(err, users) {
-                    if (!err) { res.json(users); }
-                });
+        app.post("/login", auth.authenticate("local"), function(req, res) {
+            console.log("User " + req.body.username + " has logged in.");
+            res.status(200)
+            res.send({message: "ok"});
         });
 
         app.get("/logout", function(req, res) {
             req.logout();
+            res.status(200);
+            res.send({message: "ok"})
             console.log("logged out");
-            res.redirect("/");
         });
-
-        let newUser = new User({username: "admin", password: "pass", team: "admin"});
-        newUser.save();
 
         app.listen(PORT, function() {
             console.log("Sprintr is now running on port " + PORT);

@@ -11,6 +11,15 @@ html, body {
     clear: both;
 }
 
+.halfquarterWindow {
+    height: 10vh;
+    clear: both;
+}
+
 .centeredText {
     text-align: center;
+}
+
+.backgroundGray {
+    background-color: #E0E0E0;
 }
