@@ -13,6 +13,7 @@ import {Route,
 import PropTypes from "prop-types";
 
 import AppBar from "./AppBar.jsx";
+import SignUp from "./SignUp.jsx"
 
 class Test1 extends React.Component {
     render() {
@@ -91,6 +92,7 @@ export default class Main extends React.Component {
                     <Redirect exact from='/' to='/app'/>
                     <Route path="/app" component={App}/>
                     <Route path="/login" component={Login}/>
+                    <Route path="/Signup" component={SignUp}/>
                     <Route component={Error}/>
                 </Switch>
             </Router>

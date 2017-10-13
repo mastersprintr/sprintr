@@ -3,9 +3,21 @@ import PropTypes from "prop-types";
 import Paper from "material-ui/Paper";
 import Avatar from "material-ui/Avatar";
 import styles from "../styles/appBar.js";
+import Axios from "axios";
+import AppActions from "../actions/AppActions.jsx";
+import { browserHistory } from "react-router";
 
 export default class AppBar extends React.Component {
     
+    logout = () => {
+        Axios.get("/api/logout")
+            .then((res) => {
+                if(res.status === 200 && res.data.message === "ok") {
+                    AppActions.logout();
+                }
+            });
+    }
+
     render() {
         return (
             <div id="appBar">
@@ -20,6 +32,7 @@ export default class AppBar extends React.Component {
                     <Avatar style={styles.avatar}>
                         {this.props.username[0].toUpperCase()}
                     </Avatar>
+                    <div id="logout" style={{float: "right"}} onClick={this.logout}><a href="#">logout</a></div>
                 </div>
             </div>
         );
